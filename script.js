@@ -25,6 +25,7 @@ class Calculator {
 
     if (this.computed) {
       this.currentOperand = number;
+      this.previousOperands = "";
       this.computed = false;
     } else {
       this.currentOperand = this.currentOperand + number;
@@ -33,6 +34,10 @@ class Calculator {
 
   chooseOperation(operation) {
     if (this.currentOperand[0] === "" && this.previousOperands === "") return;
+    if(this.computed){
+      this.previousOperands = ""
+      this.computed = false
+    }
     this.previousOperands += `${this.currentOperand}${operation}`;
     this.currentOperand = "";
   }
@@ -48,27 +53,27 @@ class Calculator {
     } catch (e) {
       alert(`You have an ${e.name}`);
     }
-    this.previousOperands = "";
+    this.previousOperands = computation;
     this.computed = true;
   }
-  getDisplayNummber(number) {
-    const stringNumber = number.toString();
-    const integerDigits = parseFloat(stringNumber.split(",")[0]);
-    const decimalDigits = stringNumber.split(",")[1];
-    let integerDisplay;
-    if (isNaN(integerDigits)) {
-      integerDisplay = "";
-    } else {
-      integerDisplay = integerDigits.toLocaleString("de", {
-        maximumFractionDigits: 0,
-      });
-    }
-    if (decimalDigits !== undefined) {
-      return `${integerDisplay},${decimalDigits}`;
-    } else {
-      return integerDisplay;
-    }
-  }
+  // getDisplayNummber(number) {
+  //   const stringNumber = number.toString();
+  //   const integerDigits = parseFloat(stringNumber.split(",")[0]);
+  //   const decimalDigits = stringNumber.split(",")[1];
+  //   let integerDisplay;
+  //   if (isNaN(integerDigits)) {
+  //     integerDisplay = "";
+  //   } else {
+  //     integerDisplay = integerDigits.toLocaleString("de", {
+  //       maximumFractionDigits: 0,
+  //     });
+  //   }
+  //   if (decimalDigits !== undefined) {
+  //     return `${integerDisplay},${decimalDigits}`;
+  //   } else {
+  //     return integerDisplay;
+  //   }
+  // }
   updateDisplay() {
     this.typingOperandText.innerText = this.currentOperand;
     this.typedOperandsText.innerText = this.previousOperands;
