@@ -34,9 +34,9 @@ class Calculator {
 
   chooseOperation(operation) {
     if (this.currentOperand[0] === "" && this.previousOperands === "") return;
-    if(this.computed){
-      this.previousOperands = ""
-      this.computed = false
+    if (this.computed) {
+      this.previousOperands = "";
+      this.computed = false;
     }
     this.previousOperands += `${this.currentOperand}${operation}`;
     this.currentOperand = "";
