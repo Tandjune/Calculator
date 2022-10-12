@@ -29,7 +29,7 @@ body {
   background-color: rgba(224, 220, 220, 0.966);
 }
 
-.container > button:hover{
+.container > button:hover {
   background-color: white;
 }
 
@@ -50,12 +50,11 @@ body {
   overflow-wrap: break-word;
   word-break: break-all;
 }
-.typing{
+.typing {
   font-size: 3rem;
   font-weight: bold;
 }
-.typed{
-  color: rgb(252, 252, 252,0.8);
+.typed {
+  color: rgb(252, 252, 252, 0.8);
   font-size: 1.5rem;
 }
-

@@ -13,6 +13,7 @@ class Calculator {
   }
 
   delete() {
+    this.computed = false;
     this.currentOperand = this.currentOperand.toString();
     if (this.currentOperand === "" && this.previousOperands !== "") {
       this.currentOperand = this.previousOperands;
@@ -42,11 +43,29 @@ class Calculator {
     this.previousOperands += `${this.currentOperand}${operation}`;
     this.currentOperand = "";
   }
+  keyPressed(key) {
+    const number = "0123456789,";
+    const operator = "+-*/";
+    console.log(key);
+    if (number.includes(key)) {
+      this.appendNumber(key);
+    }
+    if (operator.includes(key)) {
+      this.chooseOperation(key.replace("/", "÷"));
+    }
+    if (key === "Enter") {
+      this.compute();
+    }
+    if (key === "Backspace") {
+      this.delete();
+    }
+  }
   compute() {
+    if (this.computed) return;
     const prev = this.previousOperands.replace(",", ".");
     const current = this.currentOperand.replace(",", ".");
     const computation = prev + current;
-    if (prev === "" || current === "") return;
+    if (prev === "" && current === "") return;
     try {
       this.currentOperand = eval(computation.replace("÷", "/"))
         .toString()
@@ -106,6 +125,11 @@ const typingOperandText = document.querySelector("#typing");
 
 const calculator = new Calculator(typedOperandsText, typingOperandText);
 
+document.addEventListener("keydown", (e) => {
+  const key = e.key;
+  calculator.keyPressed(key);
+  calculator.updateDisplay();
+});
 numbersButtons.forEach((button) => {
   button.addEventListener("click", () => {
     calculator.appendNumber(button.innerText);
