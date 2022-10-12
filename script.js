@@ -15,7 +15,8 @@ class Calculator {
   delete() {
     this.currentOperand = this.currentOperand.toString();
     if (this.currentOperand === "" && this.previousOperands !== "") {
-      this.previousOperands = this.previousOperands.slice(0, -1);
+      this.currentOperand = this.previousOperands;
+      this.previousOperands = "";
     }
     this.currentOperand = this.currentOperand.slice(0, -1);
   }
